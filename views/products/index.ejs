@@ -8,6 +8,7 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <h2>Products</h2>
+    <p><a href="/products/new"><button>Add Product</button></a></p>
     <ul>
       <% for (const p of products) { %>
         <li><%= p.name %></li>

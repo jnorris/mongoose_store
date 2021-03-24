@@ -10,7 +10,7 @@ const seed = async () => {
     const product1 = {
         name: "Niko",
         description: "A cat",
-        img: "",
+        img: "https://i.imgur.com/MQtKY8F.jpg",
         price: 500,
         qty: 1
     };

@@ -8,17 +8,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const cors = require("cors")
-const mongoose = require("./db/connection")
 const debug = require('debug')(`${process.env.npm_package_name}:server`);
 const { log } = require("mercedlogger");
 
-
-const indexRouter = require('./routes/index');
-
+const productsRouter = require('./routes/products');
 const Product = require('./models/product');
 
+const PORT = process.env.PORT || '3000';
 const app = express();
-const db = mongoose.connection;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +30,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 // routes
-app.use('/', indexRouter);
+app.get('/', (req, res) => {
+  res.redirect('/products');
+});
+app.use('/products', productsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -50,8 +50,6 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-const PORT = process.env.PORT || '3000';
 
 app.listen(PORT, () => {
   debug(`Listening on port ${PORT}`);
