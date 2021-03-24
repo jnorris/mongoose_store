@@ -7,5 +7,11 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <h2>Products</h2>
+    <ul>
+      <% for (const p of products) { %>
+        <li><%= p.name %></li>
+      <% } %>
+    </ul>
   </body>
 </html>
