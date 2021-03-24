@@ -24,6 +24,10 @@ const product1 = {
    qty: 1
 };
 
-Product.create(product1).then((p) => { debug(p); }, (error) => { debug(error); });
+//Product.create(product1).then((p) => { debug(p); }, (error) => { debug(error); });
+
+Product.find((err, products) => {
+   debug(products);
+});
 
 module.exports = Product;

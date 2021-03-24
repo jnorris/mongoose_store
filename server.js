@@ -1,12 +1,17 @@
-// DEBUG=mongoose-store:* npm start
+// npm start / npm run dev
+
+require("dotenv").config();
 
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const mongoose = require('mongoose');
-const debug = require('debug')('mongoose-store:server');
+const morgan = require('morgan');
+const cors = require("cors")
+const mongoose = require("./db/connection")
+const debug = require('debug')(`${process.env.npm_package_name}:server`);
+const { log } = require("mercedlogger");
+
 
 const indexRouter = require('./routes/index');
 
@@ -15,24 +20,17 @@ const Product = require('./models/product');
 const app = express();
 const db = mongoose.connection;
 
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-}, () => {
-  debug('connected to mongodb');
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // middleware
-app.use(logger('dev'));
+app.use(cors());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
 // routes
 app.use('/', indexRouter);
@@ -51,6 +49,13 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+const PORT = process.env.PORT || '3000';
+
+app.listen(PORT, () => {
+  debug(`Listening on port ${PORT}`);
+  log.white("🚀 Server Launch 🚀", `Listening on Port ${PORT}`);
 });
 
 module.exports = app;
