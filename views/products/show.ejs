@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= product.name %></title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <img class="product_img" src="<%= product.img %>" alt="<%= product.name %>">
+  <h1 class="product_name"><%= product.name %></h1>
+  <div class="product_desc"><%= product.description %></p>
+  <div class="product_price">$<%= product.price %></p>
+</body>
+
+</html>

@@ -4,14 +4,14 @@ const debug = require('debug')('mongoose-store:controllers');
 module.exports = {
     index,
     new: newProduct,
-    create
+    create,
+    show
 };
 
 async function index(req, res) {
     const products = await Product.find({});
     res.render('products/index', {
-        title: 'Index',
-        products: products
+        products
     });
 }
 
@@ -20,8 +20,15 @@ async function newProduct(req, res) {
 }
 
 async function create(req, res) {
-    debug(req.body);
-    const product = Product.create(req.body);
+    const product = await Product.create(req.body);
     debug(product);
     res.redirect('/products');
+}
+
+async function show(req, res) {
+    const product = await Product.findById(req.params.id);
+    debug(product);
+    res.render('products/show', {
+        product
+    });
 }

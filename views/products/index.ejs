@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <h2>Products</h2>
-    <p><a href="/products/new"><button>Add Product</button></a></p>
-    <ul>
-      <% for (const p of products) { %>
-        <li><%= p.name %></li>
-      <% } %>
-    </ul>
-  </body>
+
+<head>
+  <title>Products</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Products</h1>
+  <p><a href="/products/new"><button>Add Product</button></a></p>
+  <ul class="products">
+    <% for (const product of products) { %>
+    <li class="product">
+      <a class="product_link" href="/products/<%= product._id %>">
+      <div class="product_img"><img class="product_img" src="<%= product.img %>" alt="<%= product.name %>"></div>
+      <div class="product_name"><%= product.name %></div>
+      </a>
+      <div class="product_price">$<%= product.price %></div>
+    </li>
+    <% } %>
+  </ul>
+</body>
+
 </html>
