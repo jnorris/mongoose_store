@@ -8,7 +8,8 @@ module.exports = {
     show,
     edit,
     update,
-    buy
+    buy,
+    delete: deleteProduct
 };
 
 async function index(req, res) {
@@ -56,4 +57,9 @@ async function buy(req, res) {
     product.qty--;
     product.save();
     res.redirect('/products/' + req.params.id);
+}
+
+async function deleteProduct(req, res) {
+    await Product.deleteOne({ _id: req.params.id });
+    res.redirect('/products');
 }

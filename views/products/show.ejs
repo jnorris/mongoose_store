@@ -27,7 +27,15 @@
       out of stock
     </div>
     <% } %>
-    <div class="product_edit"><a href="/products/<%= product._id %>/edit"><button>Edit</button></a></div>
+    <div class="product_edit">
+      <a href="/products/<%= product._id %>/edit"><button>Edit</button></a>
+    </div>
+    <div class="product_delete">
+      <form method="POST" action="/products/<%=product._id%>?_method=DELETE">
+        <input type="submit" value="Delete">
+      </form>
+    </div>
   </main>
 </body>
+
 </html>
