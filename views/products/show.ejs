@@ -6,11 +6,28 @@
   <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
-<body>
-  <img class="product_img" src="<%= product.img %>" alt="<%= product.name %>">
-  <h1 class="product_name"><%= product.name %></h1>
-  <div class="product_desc"><%= product.description %></p>
-  <div class="product_price">$<%= product.price %></p>
+<body class="product">
+  <nav>
+    <a href="/products"> « All Products </a>
+  </nav>
+  <main class="product">
+    <div class="product_img"><img class="product_img" src="<%= product.img %>" alt="<%= product.name %>"></div>
+    <h1 class="product_name"><%= product.name %></h1>
+    <div class="product_desc"><%= product.description %></div>
+    <div class="product_price">$<%= product.price %></div>
+    <% if (product.qty > 0) { %>
+    <div class="product_qty product_qty_instock">
+      <%= product.qty %> in stock
+    </div>
+    <form method="POST" action="/products/<%=product._id%>/buy">
+      <input type="submit" value="Buy">
+    </form>
+    <% } else { %>
+    <div class="product_qty product_qty_outofstock">
+      out of stock
+    </div>
+    <% } %>
+    <div class="product_edit"><a href="/products/<%= product._id %>/edit"><button>Edit</button></a></div>
+  </main>
 </body>
-
 </html>

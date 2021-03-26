@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= product.name %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body class="product_edit">
+    <nav>
+        <a href="/products"> « All Products </a>
+    </nav>
+    <main class="product_edit">
+        <h1>Edit Product</h1>
+        <form action="/products/<%= product._id %>?_method=PUT" method="POST">
+            <input type="text" name="name" value="<%= product.name %>" placeholder="Name"><br>
+            <input type="text" name="description" value="<%= product.description %>" placeholder="Description"><br>
+            <input type="url" name="img" value="<%= product.img %>" placeholder="Image URL"><br>
+            <input type="number" name="price" value="<%= product.price %>" placeholder="Price (dollars)"><br>
+            <input type="number" name="qty" value="<%= product.qty %>" placeholder="Quantity"><br>
+            <input type="submit" value="Submit">
+        </form>
+    </main>
+</body>
+
+</html>

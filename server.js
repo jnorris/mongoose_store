@@ -2,8 +2,9 @@
 
 require("dotenv").config();
 
-const createError = require('http-errors');
 const express = require('express');
+const methodOverride = require('method-override')
+const createError = require('http-errors');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
@@ -25,6 +26,7 @@ app.set('view engine', 'ejs');
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(morgan('dev'));
+app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

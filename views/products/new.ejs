@@ -6,7 +6,10 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 
-<body>
+<body class="product_new">
+    <nav>
+        <a href="/products"> « All Products </a>
+    </nav>
     <h1>New Product</h1>
     <form action="/products" method="POST" autocomplete="off">
         <input type="text" name="name" placeholder="Name"><br>
@@ -17,5 +20,3 @@
         <input type="submit" value="Submit">
     </form>
 </body>
-
-</html>
