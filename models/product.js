@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 const debug = require('debug')('mongoose-store:models');
 
 const productSchema = new Schema({
-   name: String,
+   name: { type: String, required: true },
    description: String,
    img: String,
-   price: Number,
-   qty: Number 
+   price: { type: Schema.Types.Decimal128, min: 0 },
+   qty: { type: Number, min: 0 }
 }, { timestamps: true });
 
 const Product = mongoose.model('Product', productSchema);

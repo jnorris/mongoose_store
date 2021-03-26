@@ -41,4 +41,6 @@ const seed = async () => {
 
 seed().catch((e) => {
     debug(e);
+}).finally(() => {
+    mongoose.disconnect();
 });
