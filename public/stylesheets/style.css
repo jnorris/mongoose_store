@@ -7,6 +7,11 @@ a {
   color: #00B7FF;
 }
 
+img.carticon {
+  width: 2em;
+  height: 2em;
+}
+
 ul.products {
   list-style-type: none;
   margin: 0;
