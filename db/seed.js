@@ -2,6 +2,7 @@ const mongoose = require('./connection');
 const debug = require('debug')('mongoose-store:db');
 
 const Product = require('../models/product');
+const User = require('../models/user');
 
 const seed = async () => {
 
@@ -37,6 +38,12 @@ const seed = async () => {
 
     const products = await Product.find();
     debug(products);
+
+    await User.deleteMany({});
+    var u = await User.create({
+        username: 'jnorris'
+    });
+    debug(u);
 };
 
 seed().catch((e) => {

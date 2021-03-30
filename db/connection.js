@@ -38,4 +38,3 @@ mongoose.connection
 // Exporting Our Connection
 ///////////////////////////////////
 module.exports = mongoose
-  

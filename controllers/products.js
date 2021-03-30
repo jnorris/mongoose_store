@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const User = require('../models/user');
 const debug = require('debug')('mongoose-store:controllers');
 
 module.exports = {
@@ -52,10 +53,12 @@ async function update(req, res) {
 }
 
 async function buy(req, res) {
-    const product = await Product.findById(req.params.id);
+    const [product, user] = await Promise.all([Product.findById(req.params.id), User.findOne({})]);
     debug(product);
+    debug(user);
+    user.cart.push(product._id);
     product.qty--;
-    product.save();
+    await Promise.all([product.save(), user.save()]);
     res.redirect('/products/' + req.params.id);
 }
 

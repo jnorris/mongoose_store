@@ -1,7 +1,5 @@
 const mongoose = require('../db/connection.js');
-const Schema = mongoose.Schema;
-
-const debug = require('debug')('mongoose-store:models');
+const { Schema } = mongoose;
 
 const productSchema = new Schema({
    name: { type: String, required: true },

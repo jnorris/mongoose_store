@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= user.username %></title>
+    <%- include('../partials/head') %>
+</head>
+
+<body class="user">
+    <nav>
+        <a href="/products"> « All Products </a>
+    </nav>
+    <main class="user">
+        <h1><%= user.username %></h1>
+        <h2>Shopping Cart</h2>
+        <% if (user.cart.length) { %>
+        <ul class="cart">
+            <% for (const product of user.cart) { %>
+                <li class="cart_item"><%= product.name %></li>
+            <% } %>
+        </ul>
+        <% } else { %>
+        <div>Your cart is empty.</div>
+        <% } %>
+    </main>
+</body>
+
+</html>
