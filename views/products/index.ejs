@@ -12,10 +12,16 @@
     </nav>
     <main class="products">
         <h1>Products</h1>
-        <div><a href="/products/new"><button>Add Product</button></a></div>
-        <ul class="products">
+        <div>
+            <label for="sort">Sort by:</label>
+            <select name="sort" id="sort">
+                <option value="name">Name</option>
+                <option value="price">Price</option>
+            </select>
+        </div>
+        <ul id="products" class="products">
             <% for (const product of products) { %>
-            <li class="product">
+            <li class="product" data-name="<%= product.name %>" data-price="<%= product.price %>">
                 <a class="product_link" href="/products/<%= product._id %>">
                     <div class="product_img"><img class="product_img" src="<%= product.img %>"
                             alt="<%= product.name %>"></div>
@@ -25,7 +31,30 @@
             </li>
             <% } %>
         </ul>
+        <div><a href="/products/new"><button>Add Product</button></a></div>
     </main>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            $('body').on('change', '#sort', event => {
+                sortItems();
+            });
+
+            sortItems();
+
+            function sortItems() {
+                const $sort = $('#sort'), $ul = $('ul#products'), $items = $ul.children();
+                const [key, compare] = {
+                    name: [($li) => $li.attr('data-name'), (a, b) => ((a == b) ? 0 : (a < b) ? -1 : 1)],
+                    price: [($li) => parseFloat($li.attr('data-price')), (a, b) => (a - b)]
+                }[$sort.val()];
+                const list = $.makeArray($items).map(li => [key($(li)), li]);
+                list.sort(([a], [b]) => compare(a, b));
+                const $sorted = $(list.map(([k, li]) => li));
+                $sorted.detach().appendTo($ul);
+            }
+        });
+    </script>
 </body>
 
 </html>
